@@ -3,7 +3,7 @@ from time import sleep
 from os import system
 from platform import system as osType ## Import this as different name to avoid mashing OS and PLATFORM tools 
 
-class FlavorText():
+class FlavorTexts():
 
     def __init__(self, patreon:bool=False) -> None:
         self.linesGenerated = 0
@@ -17,19 +17,6 @@ class FlavorText():
 
     def _random(self, int):
         return randint(0, int)
-
-    @classmethod
-    def bufferedWrite(cls, chars:list):
-        for char in chars:
-            print(char, end="")
-            sleep(0.025)
-
-    @classmethod
-    def cls(cls):
-        if osType == "Windows":
-            system("cls")
-        else:
-            system("clear")
 
     def generateText(self, constructive:bool=True):
 
@@ -82,61 +69,17 @@ class FlavorText():
         return output
 
 
+class BufferedText():
 
-def TextPrinter(textList:list, last:list, num:int) -> list:
-    
-    """Function that prints the current and last NUM flavor texts
+    @classmethod
+    def bufferedWrite(cls, chars:list):
+        for char in chars:
+            print(char, end="")
+            sleep(0.025)
 
-    Args:
-        textList (list): FlavorText Gen Output List
-        last (list): Last list of FlavorTexts.
-        num (int): Max length of the List of FlavorTexts
-
-    Returns:
-        list: A list of the last FlavorTexts with the newest one on the bottom, ideally num long.
-    """
-
-    if len(last) >= num:
-        last.pop(0)
-        FlavorText.cls()
-        print("\n".join(last))
-        FlavorText.bufferedWrite(textList)
-
-    else:
-        FlavorText.bufferedWrite(textList)
-        print()
-
-    last.append("".join(textList))
-    sleep(0.1)
-    return(last)
-
-
-def main(num:int=5, lines:int=4, appName:str=""):
-
-
-    try:
-
-        generator = FlavorText()
-        lastVals = []
-
-        if num == 0:
-            while True:
-                textList = generator.generateText(bool(randint(0,1) == 1))
-                lastVals = TextPrinter(textList, lastVals, lines)
-
+    @classmethod
+    def cls(cls):
+        if osType == "Windows":
+            system("cls")
         else:
-            for i in range(num):
-                textList = generator.generateText(bool(randint(0,1) == 1))
-                lastVals = TextPrinter(textList, lastVals, lines)
-
-        if appName != "":
-            if len(appName)+4 <= 20:
-                textList = list(f"{appName.upper()} GO!")
-                TextPrinter(textList, lastVals, lines)
-
-    except KeyboardInterrupt:
-        exit(0)
-
-if __name__ == "__main__":
-    FlavorText.cls()
-    main()
+            system("clear")
