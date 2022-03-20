@@ -18,7 +18,7 @@ setup(
     install_requires=['FlavorTexts'],
     long_description=README,
     long_description_content_type='text/markdown',
-    url='https://github.com/A-c0rN/FlavorText',
+    url='https://github.com/A-c0rN/FlavorTexts',
     keywords='random text insane',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
